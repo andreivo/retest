@@ -108,7 +108,7 @@ public class ReTestRunner extends BlockJUnit4ClassRunner {
 
     private Description describeRepeatTest(FrameworkMethod method, Description description) {
         ReTest repeat = method.getAnnotation(ReTest.class);
-        int times = repeat.times();
+        int times = repeat.value();
         for (int i = 1; i <= times; i++) {
             description.addChild(Description.createTestDescription(
                     getTestClass().getJavaClass(),

@@ -9,6 +9,7 @@ package initial;
 
 import org.retest.randomizer.IntegerRandomizer;
 import java.security.SecureRandom;
+import java.util.Random;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.retest.annotation.ReTest;
@@ -17,7 +18,10 @@ import org.retest.annotation.LoadTestFromDataFiles;
 import org.retest.annotation.params.Param;
 import org.retest.randomizer.SecureRandomSeedRandomizer;
 import static org.junit.Assert.assertEquals;
+import org.junit.Ignore;
 import org.retest.annotation.SaveBrokenTestDataFiles;
+import org.retest.annotation.SaveSuccessTestDataFiles;
+import org.retest.annotation.params.RandomParam;
 
 /**
  *
@@ -31,33 +35,83 @@ public class TestRunner {
 
     @Test
     public void testA() throws Exception {
-
         int x = 8;
         int y = 2;
-
-        //Thread.sleep(100);
-        int z = x / y;
-
-        assertEquals(4, z);
+        float z = DivisionCalc.calc(x, y);
+        float j = z * y;
+        assertEquals(j, x, 0);
     }
 
     @Test
-    @ReTest(times = 4)
-    //@SaveBrokenTestDataFiles(filePath = "/tmp")
-    //@SaveSuccessTestDataFiles(filePath = "/tmp")
-    @LoadTestFromDataFiles(filePath = {"/tmp/testC_BrokenTest.csv", "/tmp/testC_SuccessTest.csv"})
-    //public void testC(Random r, SecureRandom r1) throws Exception {
-    //public void testC(@RandomParam Random r, @SecureRandomParam SecureRandom r1) throws Exception {
-    public void testC(@Param(randomizerClass = IntegerRandomizer.class) Integer r,
-            @Param(randomizerClass = SecureRandomSeedRandomizer.class) SecureRandom r1) throws Exception {
+    public void testB() throws Exception {
+        int x = 9;
+        int y = 2;
+        float z = DivisionCalc.calc(x, y);
+        float j = z * y;
+        assertEquals(j, x, 0);
+    }
 
-        int x = r;//.nextInt(1000);
+    @Test
+    public void testC(@RandomParam Random r1) throws Exception {
+        int x = r1.nextInt(100);
+        System.out.println("X = " + x);
         int y = 2;
 
-        int z = x / y;
-        int j = z * y;
-
-        //System.out.println(x);
-        assertEquals(x, j);
+        float z = DivisionCalc.calc(x, y);
+        float j = z * y;
+        assertEquals(j, x, 0);
     }
+
+    @Test
+    @ReTest(3)
+    public void testD(@RandomParam Random r1) throws Exception {
+        int x = r1.nextInt(100);
+        int y = 2;
+
+        float z = DivisionCalc.calc(x, y);
+        float j = z * y;
+        assertEquals(j, x, 0);
+    }
+
+    @Test
+    @ReTest(3)
+    @SaveBrokenTestDataFiles(filePath = "/tmp")
+    public void testE(@RandomParam Random r1) throws Exception {
+        int x = r1.nextInt(100);
+        int y = 2;
+
+        float z = DivisionCalc.calc(x, y);
+        float j = z * y;
+        assertEquals(j, x, 0);
+    }
+
+    @Test
+    @Ignore
+    @ReTest(3)
+    @SaveBrokenTestDataFiles(filePath = "/tmp")
+    @LoadTestFromDataFiles(filePath = {"/tmp/testC_BrokenTest.csv"})
+    public void testF(@RandomParam Random r1) throws Exception {
+        int x = r1.nextInt(100);
+        int y = 2;
+
+        float z = DivisionCalc.calc(x, y);
+        float j = z * y;
+        assertEquals(j, x, 0);
+    }
+
+    @Test
+    @Ignore
+    @ReTest(3)
+    @SaveBrokenTestDataFiles(filePath = "/tmp")
+    @SaveSuccessTestDataFiles(filePath = "/tmp")
+    @LoadTestFromDataFiles(filePath = {"/tmp/testC_BrokenTest.csv", "/tmp/testC_SuccessTest.csv"})
+    public void testG(@RandomParam Random r1) throws Exception {
+        int x = r1.nextInt(100);
+        int y = 2;
+
+        float z = DivisionCalc.calc(x, y);
+        float j = z * y;
+        assertEquals(j, x, 0);
+    }
+
 }

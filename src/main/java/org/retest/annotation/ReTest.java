@@ -16,5 +16,5 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD})
 public @interface ReTest {
 
-    public abstract int times();
+    public abstract int value() default 2;
 }
