@@ -120,10 +120,11 @@ public class TestRunner {
     }
 
     @Test
-    //@SaveBrokenTestDataFiles(filePath = "/tmp")
-    //@SaveSuccessTestDataFiles(filePath = "/tmp")
-    @LoadTestFromDataFiles(filePath = {"/tmp/testH_BrokenTest.csv", "/tmp/testH_SuccessTest.csv"})
-    public void testH(@RandomParam Random r1) throws Exception {
+    @SaveBrokenTestDataFiles(filePath = "/tmp")
+    @SaveSuccessTestDataFiles(filePath = "/tmp")
+    //@LoadTestFromDataFiles(filePath = {"/tmp/testH_BrokenTest.csv", "/tmp/testH_SuccessTest.csv"})
+    public void testH() throws Exception {
+        Random r1 = new Random();
         int x = r1.nextInt(100);
         int y = 2;
 
