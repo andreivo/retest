@@ -139,6 +139,10 @@ public class ReTestRunner extends BlockJUnit4ClassRunner {
                 }
                 payloads.add(loadDataFromFile);
             } else {
+                description.addChild(Description.createTestDescription(
+                        getTestClass().getJavaClass(),
+                        testName(method) + " " + DESCRIBE_FILE + "[" + (k + 1) + "]" + ff.getName() + "[" + (0) + "]"
+                ));
                 payloads.add(null);
             }
         }
@@ -152,7 +156,6 @@ public class ReTestRunner extends BlockJUnit4ClassRunner {
 
         if ((method.getAnnotation(ReTest.class) != null || method.getAnnotation(LoadTestFromDataFiles.class) != null)
                 && method.getAnnotation(Ignore.class) == null) {
-
             runRepeatedly(methodBlock(method), description, notifier);
         } else {
             super.runChild(method, notifier);
@@ -168,7 +171,11 @@ public class ReTestRunner extends BlockJUnit4ClassRunner {
                 if (payloads != null) {
                     int indexFile = getIndexFile(desc.getDisplayName());
                     int indexData = getIndexData(desc.getDisplayName());
-                    ((ReTestStatement) statement).setTestPayload(payloads.get(indexFile).get(indexData));
+                    if (payloads.get(indexFile) != null) {
+                        ((ReTestStatement) statement).setTestPayload(payloads.get(indexFile).get(indexData));
+                    } else {
+                        ((ReTestStatement) statement).setTestPayload(null);
+                    }
                 }
             } else {
                 ((ReTestStatement) statement).setTestFromDataFile(false);

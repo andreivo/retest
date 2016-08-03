@@ -119,8 +119,10 @@ public class ReTestStatement extends Statement {
                 Object[] values = null;
                 if (!testFromDataFile) {
                     values = randomizeParams(method);
-                } else {
+                } else if (testPayload != null) {
                     values = testPayload.toArray();
+                } else {
+                    Assert.fail("Data not found!");
                 }
                 method.invokeExplosively(freshInstance, values);
             }
