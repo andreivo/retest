@@ -138,6 +138,8 @@ public class ReTestRunner extends BlockJUnit4ClassRunner {
 
                 }
                 payloads.add(loadDataFromFile);
+            } else {
+                payloads.add(null);
             }
         }
 
@@ -148,7 +150,7 @@ public class ReTestRunner extends BlockJUnit4ClassRunner {
     protected void runChild(final FrameworkMethod method, RunNotifier notifier) {
         Description description = describeChild(method);
 
-        if (method.getAnnotation(ReTest.class) != null
+        if ((method.getAnnotation(ReTest.class) != null || method.getAnnotation(LoadTestFromDataFiles.class) != null)
                 && method.getAnnotation(Ignore.class) == null) {
 
             runRepeatedly(methodBlock(method), description, notifier);
@@ -160,8 +162,6 @@ public class ReTestRunner extends BlockJUnit4ClassRunner {
     private void runRepeatedly(Statement statement, Description description,
             RunNotifier notifier) {
         for (Description desc : description.getChildren()) {
-
-            desc.getDisplayName();
 
             if (desc.getDisplayName().contains(DESCRIBE_FILE)) {
                 ((ReTestStatement) statement).setTestFromDataFile(true);
