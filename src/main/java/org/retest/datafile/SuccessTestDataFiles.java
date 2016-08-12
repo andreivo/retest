@@ -10,7 +10,6 @@ package org.retest.datafile;
 import java.io.IOException;
 import java.util.List;
 import org.junit.runners.model.FrameworkMethod;
-import org.retest.annotation.SaveBrokenTestDataFiles;
 import org.retest.annotation.SaveSuccessTestDataFiles;
 
 /**
@@ -26,12 +25,12 @@ public class SuccessTestDataFiles extends AbstractTestDataFiles {
     }
 
     @Override
-    public void save() throws IOException, InstantiationException, IllegalAccessException, Exception {
+    public void save(Object returnValue) throws IOException, InstantiationException, IllegalAccessException, Exception {
         if (getMethod().getAnnotation(SaveSuccessTestDataFiles.class) != null) {
-            if (getArguments() != null) {
+            if (getArgumentsToSave(returnValue) != null) {
                 SaveSuccessTestDataFiles an = getMethod().getAnnotation(SaveSuccessTestDataFiles.class);
                 TestDataFiles tdf = an.formatClass().newInstance();
-                tdf.save(getFilePath(tdf.getFileExtension()), getMethod(), getArguments());
+                tdf.save(getFilePath(an.filePath(), tdf.getFileExtension()), getMethod(), getArgumentsToSave(returnValue));
             } else {
                 System.out.println("Data not found : annotation " + SaveSuccessTestDataFiles.class.getSimpleName() + " cannot be used.");
             }

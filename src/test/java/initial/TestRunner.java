@@ -7,7 +7,7 @@
  */
 package initial;
 
-import org.retest.randomizer.IntegerRandomizer;
+import org.retest.datatype.IntegerDataType;
 import java.security.SecureRandom;
 import java.util.Random;
 import org.junit.Test;
@@ -16,12 +16,15 @@ import org.retest.annotation.ReTest;
 import org.retest.ReTestRunner;
 import org.retest.annotation.LoadTestFromDataFiles;
 import org.retest.annotation.params.Param;
-import org.retest.randomizer.SecureRandomSeedRandomizer;
+import org.retest.datatype.SecureRandomSeedDataType;
 import static org.junit.Assert.assertEquals;
 import org.junit.Ignore;
 import org.retest.annotation.SaveBrokenTestDataFiles;
 import org.retest.annotation.SaveSuccessTestDataFiles;
 import org.retest.annotation.params.RandomParam;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 /**
  *
@@ -105,11 +108,10 @@ public class TestRunner {
     }
 
     @Test
-    @Ignore
     @ReTest(3)
     @SaveBrokenTestDataFiles(filePath = "/tmp")
     @SaveSuccessTestDataFiles(filePath = "/tmp")
-    @LoadTestFromDataFiles(filePath = {"/tmp/testC_BrokenTest.csv", "/tmp/testC_SuccessTest.csv"})
+    @LoadTestFromDataFiles(filePath = {"/tmp/testG_BrokenTest.csv", "/tmp/testG_SuccessTest.csv"})
     public void testG(@RandomParam Random r1) throws Exception {
         int x = r1.nextInt(100);
         int y = 2;
@@ -120,6 +122,7 @@ public class TestRunner {
     }
 
     @Test
+    @Ignore
     @SaveBrokenTestDataFiles(filePath = "/tmp")
     @SaveSuccessTestDataFiles(filePath = "/tmp")
     //@LoadTestFromDataFiles(filePath = {"/tmp/testH_BrokenTest.csv", "/tmp/testH_SuccessTest.csv"})
@@ -132,5 +135,4 @@ public class TestRunner {
         float j = z * y;
         assertEquals(j, x, 0);
     }
-
 }

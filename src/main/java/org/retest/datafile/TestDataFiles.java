@@ -12,9 +12,10 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.runners.model.FrameworkMethod;
 import org.retest.annotation.params.Param;
+import org.retest.annotation.params.ParamExpected;
 import org.retest.annotation.params.RandomParam;
 import org.retest.annotation.params.SecureRandomParam;
-import org.retest.randomizer.Randomizer;
+import org.retest.datatype.DataType;
 
 /**
  *
@@ -31,39 +32,33 @@ public abstract class TestDataFiles {
     public abstract List<Object> convertData(String record, FrameworkMethod method) throws Exception;
 
     public Object convertToObject(FrameworkMethod method, String convertFrom, int indexOfArguments) throws InstantiationException, IllegalAccessException {
-        Object finalData = null;     
+        Object finalData = null;
         Annotation[][] parameterAnnotations = method.getMethod().getParameterAnnotations();
         if (parameterAnnotations[indexOfArguments].length > 0) {
+
+            if (parameterAnnotations.length < indexOfArguments + 1) {
+                Assert.fail("Invalid number of parameters. The number of parameters in the file is greater than the test function.");
+            }
+
             Annotation a = parameterAnnotations[indexOfArguments][0];
-            Class<? extends Randomizer> randomizerClass = null;
-            if (a.annotationType() == Param.class) {
-                randomizerClass = ((Param) a).randomizerClass();
+
+            Class<? extends DataType> dataTypeClass = null;
+            if (a.annotationType() == ParamExpected.class) {
+                dataTypeClass = ((ParamExpected) a).dataTypeClass();
+            } else if (a.annotationType() == Param.class) {
+                dataTypeClass = ((Param) a).dataTypeClass();
             } else if (a.annotationType() == RandomParam.class) {
-                randomizerClass = ((RandomParam) a).randomizerClass();
+                dataTypeClass = ((RandomParam) a).randomizerClass();
             } else if (a.annotationType() == SecureRandomParam.class) {
-                randomizerClass = ((SecureRandomParam) a).randomizerClass();
+                dataTypeClass = ((SecureRandomParam) a).randomizerClass();
             } else {
                 Assert.fail("Test method " + method.getName() + " contain invalid annotation param. @Param annotation not found!");
             }
-            Randomizer con = randomizerClass.newInstance();           
+            DataType con = dataTypeClass.newInstance();
             finalData = con.getObjectFromString(convertFrom);
         } else {
             Assert.fail("Test method " + method.getName() + " contain invalid param. @Param annotation not found!");
         }
-
-//        for (Annotation a : parameterAnnotations) {
-//            Class<? extends Randomizer> randomizerClass = null;
-//            if (a.annotationType() == Param.class) {
-//                randomizerClass = ((Param) a).randomizerClass();
-//            } else if (a.annotationType() == RandomParam.class) {
-//                randomizerClass = ((RandomParam) a).randomizerClass();
-//            } else if (a.annotationType() == SecureRandomParam.class) {
-//                randomizerClass = ((SecureRandomParam) a).randomizerClass();
-//            }
-//
-//            Randomizer con = randomizerClass.newInstance();
-//            finalData = con.getObjectFromString(convertFrom);
-//        }
 
         return finalData;
     }

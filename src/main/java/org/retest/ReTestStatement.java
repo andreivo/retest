@@ -18,11 +18,13 @@ import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
 import org.junit.runners.model.TestClass;
 import org.retest.annotation.params.Param;
+import org.retest.annotation.params.ParamExpected;
 import org.retest.annotation.params.RandomParam;
 import org.retest.annotation.params.SecureRandomParam;
-import org.retest.randomizer.Randomizer;
+import org.retest.datatype.DataType;
 import org.retest.datafile.BrokenTestDataFiles;
 import org.retest.datafile.SuccessTestDataFiles;
+import org.retest.datatype.NullDataType;
 
 /**
  *
@@ -38,6 +40,7 @@ public class ReTestStatement extends Statement {
     private final List<AssumptionViolatedException> fInvalidParameters = new ArrayList<>();
     private boolean testFromDataFile;
     private List<Object> testPayload;
+    private Object returnValue;
 
     public ReTestStatement(FrameworkMethod _method, TestClass _testClass, Object _testInstance) {
         testMethod = _method;
@@ -79,20 +82,20 @@ public class ReTestStatement extends Statement {
 
                             if (!testFromDataFile) {
                                 SuccessTestDataFiles stdf = new SuccessTestDataFiles(method, testPayload);
-                                stdf.save();
+                                stdf.save(returnValue);
                             }
 
                         } catch (AssumptionViolatedException e) {
                             if (!testFromDataFile) {
                                 BrokenTestDataFiles btdf = new BrokenTestDataFiles(method, testPayload);
-                                btdf.save();
+                                btdf.save(returnValue);
                             }
 
                             handleAssumptionViolation(e);
                         } catch (Throwable e) {
                             if (!testFromDataFile) {
                                 BrokenTestDataFiles btdf = new BrokenTestDataFiles(method, testPayload);
-                                btdf.save();
+                                btdf.save(returnValue);
                             }
                             throw e;
                         }
@@ -124,13 +127,14 @@ public class ReTestStatement extends Statement {
                 } else {
                     Assert.fail("Data not found!");
                 }
-                method.invokeExplosively(freshInstance, values);
+                returnValue = method.invokeExplosively(freshInstance, values);
             }
         };
     }
 
     private Object[] randomizeParams(final FrameworkMethod method) throws InstantiationException, IllegalAccessException {
         Annotation[][] parameterAnnotations = method.getMethod().getParameterAnnotations();
+        Class<?>[] parameterTypes = method.getMethod().getParameterTypes();
 
         if (parameterAnnotations.length > 0) {
             testPayload = new ArrayList<>();
@@ -138,17 +142,24 @@ public class ReTestStatement extends Statement {
                 Object item = null;
                 if (parameterAnnotations[i].length > 0) {
                     Annotation a = parameterAnnotations[i][0];
-                    Class<? extends Randomizer> randomizerClass = null;
-                    if (a.annotationType() == Param.class) {
-                        randomizerClass = ((Param) a).randomizerClass();
+
+                    if (parameterTypes[i].isPrimitive()) {
+                        Assert.fail("Dont use primitive types for @Param. Expected a Class instead of '" + parameterTypes[i].getName() + "'");
+                    }
+
+                    Class<? extends DataType> dataTypeClass = null;
+                    if (a.annotationType() == ParamExpected.class) {
+                        dataTypeClass = NullDataType.class;
+                    } else if (a.annotationType() == Param.class) {
+                        dataTypeClass = ((Param) a).dataTypeClass();
                     } else if (a.annotationType() == RandomParam.class) {
-                        randomizerClass = ((RandomParam) a).randomizerClass();
+                        dataTypeClass = ((RandomParam) a).randomizerClass();
                     } else if (a.annotationType() == SecureRandomParam.class) {
-                        randomizerClass = ((SecureRandomParam) a).randomizerClass();
+                        dataTypeClass = ((SecureRandomParam) a).randomizerClass();
                     } else {
                         Assert.fail("Test method " + method.getName() + " contain invalid annotation param. @Param annotation not found!");
                     }
-                    Randomizer con = randomizerClass.newInstance();
+                    DataType con = dataTypeClass.newInstance();
                     item = con.randomizeParam();
                 } else {
                     Assert.fail("Test method " + method.getName() + " contain invalid param. @Param annotation not found!");

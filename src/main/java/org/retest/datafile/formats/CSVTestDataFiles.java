@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.runners.model.FrameworkMethod;
 import org.retest.annotation.params.Param;
+import org.retest.annotation.params.ParamExpected;
 import org.retest.annotation.params.RandomParam;
 import org.retest.annotation.params.SecureRandomParam;
 import org.retest.datafile.DataFilePayload;
@@ -76,7 +77,9 @@ public class CSVTestDataFiles extends TestDataFiles {
             for (Annotation[] aa : method.getMethod().getParameterAnnotations()) {
                 for (Annotation a : aa) {
                     String valueName = null;
-                    if (a.annotationType() == Param.class) {
+                    if (a.annotationType() == ParamExpected.class) {
+                        valueName = ((ParamExpected) a).name();
+                    } else if (a.annotationType() == Param.class) {
                         valueName = ((Param) a).name();
                     } else if (a.annotationType() == RandomParam.class) {
                         valueName = ((RandomParam) a).name();
@@ -117,7 +120,7 @@ public class CSVTestDataFiles extends TestDataFiles {
 
     @Override
     public List<Object> convertData(String record, FrameworkMethod method) throws InstantiationException, IllegalAccessException {
-        String[] split = record.split(DELIM);        
+        String[] split = record.split(DELIM);
         List<Object> result = null;
         result = new ArrayList<>();
         for (int i = 0; i < split.length; i++) {

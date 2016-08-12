@@ -5,17 +5,17 @@
  *           Created on : Jul 29, 2016, 3:05:22 PM
  * ****************************************************************
  */
-package org.retest.randomizer;
+package org.retest.datatype;
 
 /**
  *
  * @author andreivo
  * @param <T>
  */
-public abstract class Randomizer<T> {
+public abstract class DataType<T> {
 
     /**
-    * Randomizer String into a correct object value
+    * DataType String into a correct object value
     * 
      * @param value String that represents a object
      * @return Returns a correct object 

@@ -5,7 +5,7 @@
  *           Created on : Jul 29, 2016, 3:04:54 PM
  * ****************************************************************
  */
-package org.retest.randomizer;
+package org.retest.datatype;
 
 import org.retest.utils.SecureRandomSeed;
 
@@ -13,7 +13,7 @@ import org.retest.utils.SecureRandomSeed;
  *
  * @author andreivo
  */
-public class SecureRandomSeedRandomizer extends Randomizer<SecureRandomSeed> {
+public class SecureRandomSeedDataType extends DataType<SecureRandomSeed> {
 
     @Override
     public SecureRandomSeed getObjectFromString(String value) {

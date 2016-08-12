@@ -5,7 +5,7 @@
  *           Created on : Jul 29, 2016, 3:04:54 PM
  * ****************************************************************
  */
-package org.retest.randomizer;
+package org.retest.datatype;
 
 import java.util.Random;
 
@@ -13,7 +13,7 @@ import java.util.Random;
  *
  * @author andreivo
  */
-public class IntegerRandomizer extends Randomizer<Integer> {
+public class IntegerDataType extends DataType<Integer> {
 
     @Override
     public Integer getObjectFromString(String value) {
