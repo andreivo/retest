@@ -13,12 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.runners.model.FrameworkMethod;
-import org.retest.annotation.SaveBrokenTestDataFiles;
-import org.retest.annotation.params.Param;
 import org.retest.annotation.params.ParamExpected;
-import org.retest.annotation.params.RandomParam;
-import org.retest.annotation.params.SecureRandomParam;
-import org.retest.datatype.DataType;
 
 /**
  *
@@ -45,6 +40,8 @@ public abstract class AbstractTestDataFiles {
     public List<Object> getArgumentsToSave(Object returnValue) {
         Annotation[][] parameterAnnotations = method.getMethod().getParameterAnnotations();
 
+        boolean hasParamExpected = false;
+
         if (parameterAnnotations.length > 0) {
             List result = new ArrayList<>();
             for (int i = 0; i < parameterAnnotations.length; i++) {
@@ -53,6 +50,11 @@ public abstract class AbstractTestDataFiles {
                     Annotation a = parameterAnnotations[i][0];
                     if (a.annotationType() != ParamExpected.class) {
                         result.add(arguments.get(i));
+                    } else if (!hasParamExpected) {
+                        result.add(returnValue);
+                        hasParamExpected = true;
+                    } else {
+                        Assert.fail("Test function has more than one parameter @ParamExpected!");
                     }
                 }
             }

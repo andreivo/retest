@@ -30,7 +30,7 @@ public class BrokenTestDataFiles extends AbstractTestDataFiles {
             if (getArgumentsToSave(returnValue) != null) {
                 SaveBrokenTestDataFiles an = getMethod().getAnnotation(SaveBrokenTestDataFiles.class);
                 TestDataFiles tdf = an.formatClass().newInstance();
-                tdf.save(getFilePath(an.filePath(), tdf.getFileExtension()), getMethod(), getArgumentsToSave(returnValue));
+                tdf.save(getFilePath(an.filePath(), tdf.getFileExtension()), getMethod(), getArgumentsToSave(returnValue), (returnValue != null));
             } else {
                 System.out.println("Data not found : annotation " + SaveBrokenTestDataFiles.class.getSimpleName() + " cannot be used.");
             }

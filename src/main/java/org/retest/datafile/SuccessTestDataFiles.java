@@ -30,7 +30,7 @@ public class SuccessTestDataFiles extends AbstractTestDataFiles {
             if (getArgumentsToSave(returnValue) != null) {
                 SaveSuccessTestDataFiles an = getMethod().getAnnotation(SaveSuccessTestDataFiles.class);
                 TestDataFiles tdf = an.formatClass().newInstance();
-                tdf.save(getFilePath(an.filePath(), tdf.getFileExtension()), getMethod(), getArgumentsToSave(returnValue));
+                tdf.save(getFilePath(an.filePath(), tdf.getFileExtension()), getMethod(), getArgumentsToSave(returnValue), (returnValue != null));
             } else {
                 System.out.println("Data not found : annotation " + SaveSuccessTestDataFiles.class.getSimpleName() + " cannot be used.");
             }

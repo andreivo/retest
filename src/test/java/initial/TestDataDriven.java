@@ -23,15 +23,16 @@
  */
 package initial;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.retest.ReTestRunner;
 import org.retest.annotation.LoadTestFromDataFiles;
+import org.retest.annotation.ReTest;
+import org.retest.annotation.SaveBrokenTestDataFiles;
 import org.retest.annotation.SaveSuccessTestDataFiles;
-import org.retest.annotation.params.Param;
+import org.retest.annotation.params.IntegerParam;
 import org.retest.annotation.params.ParamExpected;
 import org.retest.datatype.IntegerDataType;
 
@@ -46,19 +47,34 @@ public class TestDataDriven {
     }
 
     @Test
+    @Ignore
+    @ReTest(10)
     @SaveSuccessTestDataFiles(filePath = "/tmp/testData.csv")
-    public Integer testA(@Param(dataTypeClass = IntegerDataType.class) Integer i1,
-            @Param(dataTypeClass = IntegerDataType.class) Integer i2) throws Exception {
+    public Integer testA(@IntegerParam Integer i1, @IntegerParam Integer i2) {
         int x = i1 + i2;
         return x;
     }
-
-    @Test
+    
+    @Test    
+    @Ignore
     @LoadTestFromDataFiles(filePath = "/tmp/testData.csv")
-    public void testB(@Param(dataTypeClass = IntegerDataType.class) Integer i1,
-            @Param(dataTypeClass = IntegerDataType.class) Integer i2,
-            @ParamExpected(dataTypeClass = IntegerDataType.class) Integer r) throws Exception {
+    public void testB(@IntegerParam Integer i1, @IntegerParam Integer i2,
+            @ParamExpected(dataTypeClass = IntegerDataType.class) Integer r) {
         int x = i1 + i2;
         assertEquals(x, r, 0);
     }
+
+    
+    
+    @Test
+    @LoadTestFromDataFiles(filePath = {"/tmp/testData.csv", "/tmp/brokenTest.csv"})
+    public Integer testC(@IntegerParam Integer i1, @IntegerParam Integer i2,
+            @ParamExpected(dataTypeClass = IntegerDataType.class) Integer r) {
+        int x = i1 + i2;
+        
+        assertEquals(x, r, 0);
+        return x;
+    }
+    
+    
 }

@@ -13,14 +13,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.runners.model.FrameworkMethod;
-import org.retest.annotation.params.Param;
-import org.retest.annotation.params.ParamExpected;
-import org.retest.annotation.params.RandomParam;
-import org.retest.annotation.params.SecureRandomParam;
 import org.retest.datafile.DataFilePayload;
 import org.retest.datafile.TestDataFiles;
 
@@ -39,8 +34,8 @@ public class CSVTestDataFiles extends TestDataFiles {
     }
 
     @Override
-    public void save(String filePath, FrameworkMethod method, List<Object> arguments) throws IOException {
-        saveHeader(filePath, method);
+    public void save(String filePath, FrameworkMethod method, List<Object> arguments, boolean hasExpectedValue) throws IOException {
+        saveHeader(filePath, method, hasExpectedValue);
         saveBodyItem(filePath, arguments);
     }
 
@@ -61,7 +56,7 @@ public class CSVTestDataFiles extends TestDataFiles {
         bw.close();
     }
 
-    private void saveHeader(String filePath, FrameworkMethod method) throws IOException {
+    private void saveHeader(String filePath, FrameworkMethod method, boolean hasExpectedValue) throws IOException {
 
         File file = new File(filePath);
 
@@ -73,29 +68,12 @@ public class CSVTestDataFiles extends TestDataFiles {
 
             StringBuilder content = new StringBuilder();
             String delim = "";
+            
+            List<String> headers = getHeader(method, hasExpectedValue);
 
-            for (Annotation[] aa : method.getMethod().getParameterAnnotations()) {
-                for (Annotation a : aa) {
-                    String valueName = null;
-                    if (a.annotationType() == ParamExpected.class) {
-                        valueName = ((ParamExpected) a).name();
-                    } else if (a.annotationType() == Param.class) {
-                        valueName = ((Param) a).name();
-                    } else if (a.annotationType() == RandomParam.class) {
-                        valueName = ((RandomParam) a).name();
-                    } else if (a.annotationType() == SecureRandomParam.class) {
-                        valueName = ((SecureRandomParam) a).name();
-                    }
-
-                    if (valueName.isEmpty()) {
-                        Class<? extends Annotation> type = a.annotationType();
-                        valueName = type.getSimpleName();
-                    }
-
-                    content.append(delim).append(valueName);
-
+            for (String header : headers) {
+                    content.append(delim).append(header);
                     delim = DELIM;
-                }
             }
 
             bw.write(content.toString());
@@ -128,5 +106,10 @@ public class CSVTestDataFiles extends TestDataFiles {
             result.add(item);
         }
         return result;
+    }
+
+    @Override
+    public String getDelimitador() {
+        return DELIM;
     }
 }

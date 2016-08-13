@@ -65,11 +65,6 @@ public class ReTestRunner extends BlockJUnit4ClassRunner {
         return String.format("%s", method.getName());
     }
 
-//    @Override
-//    public void run(RunNotifier notifier) {
-//        notifier.addListener(new ReTestRunnerListener());
-//        super.run(notifier);
-//    }
     @Override
     protected Description describeChild(FrameworkMethod method) {
         Description description = null;

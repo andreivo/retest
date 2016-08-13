@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="1" failures="0" name="initial.TestDataDriven" time="0.079" errors="0" skipped="0">
+<testsuite tests="7" failures="1" name="initial.TestDataDriven" time="88.361" errors="2" skipped="2">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64"/>
     <property name="java.vm.version" value="25.91-b14"/>
-    <property name="user.country.format" value="BR"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
     <property name="path.separator" value=":"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
     <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
     <property name="file.encoding.pkg" value="sun.io"/>
-    <property name="user.country" value="US"/>
+    <property name="user.country" value="BR"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value="unknown"/>
     <property name="test" value="initial.TestDataDriven"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="/home/andreivo/repository/github/retest"/>
+    <property name="user.dir" value="/dados/projetos/repository/github/retest"/>
     <property name="java.runtime.version" value="1.8.0_91-8u91-b14-3ubuntu1~16.04.1-b14"/>
     <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="/usr/lib/jvm/java-8-openjdk-amd64/jre/lib/endorsed"/>
@@ -29,11 +28,13 @@
     <property name="maven.ext.class.path" value="/usr/local/netbeans-8.1/java/maven-nblib/netbeans-eventspy.jar"/>
     <property name="classworlds.conf" value="/usr/local/netbeans-8.1/java/maven/bin/m2.conf"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
-    <property name="java.library.path" value="/usr/java/packages/lib/amd64:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib"/>
+    <property name="java.library.path" value="/usr/lib/jvm/default-java/jre/lib/amd64:/usr/lib/jvm/default-java/jre/lib/i386::/usr/java/packages/lib/amd64:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="52.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="os.version" value="4.4.0-31-generic"/>
+    <property name="jpda.listen" value="true"/>
+    <property name="jpda.address" value="42009"/>
     <property name="user.home" value="/home/andreivo"/>
     <property name="user.timezone" value="America/Sao_Paulo"/>
     <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/>
@@ -41,13 +42,13 @@
     <property name="file.encoding" value="UTF-8"/>
     <property name="user.name" value="andreivo"/>
     <property name="java.class.path" value="/usr/local/netbeans-8.1/java/maven/boot/plexus-classworlds-2.4.jar"/>
+    <property name="maven.surefire.debug" value="-Xdebug -Xrunjdwp:transport=dt_socket,server=n,address=42009"/>
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.home" value="/usr/lib/jvm/java-8-openjdk-amd64/jre"/>
-    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dtest=initial.TestDataDriven -Dmaven.ext.class.path=/usr/local/netbeans-8.1/java/maven-nblib/netbeans-eventspy.jar surefire:test"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dtest=initial.TestDataDriven -DforkMode=once -Dmaven.surefire.debug=-Xdebug -Xrunjdwp:transport=dt_socket,server=n,address=42009 -Djpda.listen=true -Djpda.address=42009 -Dmaven.ext.class.path=/usr/local/netbeans-8.1/java/maven-nblib/netbeans-eventspy.jar surefire:test"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
-    <property name="user.language" value="en"/>
-    <property name="user.language.format" value="pt"/>
+    <property name="user.language" value="pt"/>
     <property name="awt.toolkit" value="sun.awt.X11.XToolkit"/>
     <property name="java.vm.info" value="mixed mode"/>
     <property name="java.version" value="1.8.0_91"/>
@@ -58,10 +59,113 @@
     <property name="maven.home" value="/usr/local/netbeans-8.1/java/maven"/>
     <property name="file.separator" value="/"/>
     <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
+    <property name="forkMode" value="once"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="initial.TestDataDriven" name="testA" time="0.008"/>
+  <testcase classname="initial.TestDataDriven" name="testA" time="0">
+    <skipped/>
+  </testcase>
+  <testcase classname="initial.TestDataDriven" name="testB" time="0.006">
+    <skipped/>
+  </testcase>
+  <testcase classname="initial.TestDataDriven" name="testC ReTest[1]" time="45.987">
+    <error type="java.lang.NullPointerException">java.lang.NullPointerException
+	at org.retest.datafile.formats.CSVTestDataFiles.saveBodyItem(CSVTestDataFiles.java:48)
+	at org.retest.datafile.formats.CSVTestDataFiles.save(CSVTestDataFiles.java:39)
+	at org.retest.datafile.BrokenTestDataFiles.save(BrokenTestDataFiles.java:33)
+	at org.retest.ReTestStatement$1$1.evaluate(ReTestStatement.java:99)
+	at org.retest.ReTestStatement.runWithCompleteAssignment(ReTestStatement.java:116)
+	at org.retest.ReTestStatement.evaluate(ReTestStatement.java:58)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.retest.ReTestRunner.runRepeatedly(ReTestRunner.java:179)
+	at org.retest.ReTestRunner.runChild(ReTestRunner.java:154)
+	at org.retest.ReTestRunner.runChild(ReTestRunner.java:32)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:104)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:164)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:110)
+	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
+	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
+</error>
+  </testcase>
+  <testcase classname="initial.TestDataDriven" name="testC ReTest[2]" time="7.378">
+    <error type="java.lang.NullPointerException">java.lang.NullPointerException
+	at org.retest.datafile.formats.CSVTestDataFiles.saveBodyItem(CSVTestDataFiles.java:48)
+	at org.retest.datafile.formats.CSVTestDataFiles.save(CSVTestDataFiles.java:39)
+	at org.retest.datafile.BrokenTestDataFiles.save(BrokenTestDataFiles.java:33)
+	at org.retest.ReTestStatement$1$1.evaluate(ReTestStatement.java:99)
+	at org.retest.ReTestStatement.runWithCompleteAssignment(ReTestStatement.java:116)
+	at org.retest.ReTestStatement.evaluate(ReTestStatement.java:58)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.retest.ReTestRunner.runRepeatedly(ReTestRunner.java:179)
+	at org.retest.ReTestRunner.runChild(ReTestRunner.java:154)
+	at org.retest.ReTestRunner.runChild(ReTestRunner.java:32)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:104)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:164)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:110)
+	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
+	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
+</error>
+  </testcase>
+  <testcase classname="initial.TestDataDriven" name="testC FILE:[1]testData.csv[1]" time="28.036"/>
+  <testcase classname="initial.TestDataDriven" name="testC FILE:[1]testData.csv[2]" time="6.755"/>
+  <testcase classname="initial.TestDataDriven" name="testC FILE:[2]brokenTest.csv[0]" time="0.005">
+    <failure message="Data not found!" type="java.lang.AssertionError">java.lang.AssertionError: Data not found!
+	at org.junit.Assert.fail(Assert.java:88)
+	at org.retest.ReTestStatement$2.evaluate(ReTestStatement.java:129)
+	at org.retest.ReTestStatement$1$1.evaluate(ReTestStatement.java:81)
+	at org.retest.ReTestStatement.runWithCompleteAssignment(ReTestStatement.java:116)
+	at org.retest.ReTestStatement.evaluate(ReTestStatement.java:58)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.retest.ReTestRunner.runRepeatedly(ReTestRunner.java:179)
+	at org.retest.ReTestRunner.runChild(ReTestRunner.java:154)
+	at org.retest.ReTestRunner.runChild(ReTestRunner.java:32)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:104)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:164)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:110)
+	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
+	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
+</failure>
+  </testcase>
 </testsuite>
