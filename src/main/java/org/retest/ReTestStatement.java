@@ -19,7 +19,6 @@ import org.junit.runners.model.Statement;
 import org.junit.runners.model.TestClass;
 import org.retest.annotation.params.IntegerParam;
 import org.retest.annotation.params.Param;
-import org.retest.annotation.params.ParamExpected;
 import org.retest.annotation.params.RandomParam;
 import org.retest.annotation.params.SecureRandomParam;
 import org.retest.datatype.DataType;
@@ -149,9 +148,7 @@ public class ReTestStatement extends Statement {
                     }
 
                     Class<? extends DataType> dataTypeClass = null;
-                    if (a.annotationType() == ParamExpected.class) {
-                        dataTypeClass = NullDataType.class;
-                    } else if (a.annotationType() == Param.class) {
+                    if (a.annotationType() == Param.class) {
                         dataTypeClass = ((Param) a).dataTypeClass();
                     } else if (a.annotationType() == RandomParam.class) {
                         dataTypeClass = ((RandomParam) a).randomizerClass();
@@ -159,7 +156,7 @@ public class ReTestStatement extends Statement {
                         dataTypeClass = ((SecureRandomParam) a).randomizerClass();
                     } else if (a.annotationType() == IntegerParam.class) {
                         dataTypeClass = ((IntegerParam) a).randomizerClass();
-                    } else{
+                    } else {
                         Assert.fail("Test method " + method.getName() + " contain invalid annotation param. @Param annotation not found!");
                     }
                     DataType con = dataTypeClass.newInstance();

@@ -30,11 +30,8 @@ import org.junit.runner.RunWith;
 import org.retest.ReTestRunner;
 import org.retest.annotation.LoadTestFromDataFiles;
 import org.retest.annotation.ReTest;
-import org.retest.annotation.SaveBrokenTestDataFiles;
 import org.retest.annotation.SaveSuccessTestDataFiles;
 import org.retest.annotation.params.IntegerParam;
-import org.retest.annotation.params.ParamExpected;
-import org.retest.datatype.IntegerDataType;
 
 /**
  *
@@ -55,26 +52,13 @@ public class TestDataDriven {
         return x;
     }
     
-    @Test    
-    @Ignore
+    @Test      
     @LoadTestFromDataFiles(filePath = "/tmp/testData.csv")
-    public void testB(@IntegerParam Integer i1, @IntegerParam Integer i2,
-            @ParamExpected(dataTypeClass = IntegerDataType.class) Integer r) {
+    public void testB(@IntegerParam Integer i1, 
+                      @IntegerParam Integer i2,
+                      @IntegerParam Integer r) {
         int x = i1 + i2;
         assertEquals(x, r, 0);
     }
-
-    
-    
-    @Test
-    @LoadTestFromDataFiles(filePath = {"/tmp/testData.csv", "/tmp/brokenTest.csv"})
-    public Integer testC(@IntegerParam Integer i1, @IntegerParam Integer i2,
-            @ParamExpected(dataTypeClass = IntegerDataType.class) Integer r) {
-        int x = i1 + i2;
-        
-        assertEquals(x, r, 0);
-        return x;
-    }
-    
     
 }

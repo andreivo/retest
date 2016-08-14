@@ -14,7 +14,6 @@ import org.junit.Assert;
 import org.junit.runners.model.FrameworkMethod;
 import org.retest.annotation.params.IntegerParam;
 import org.retest.annotation.params.Param;
-import org.retest.annotation.params.ParamExpected;
 import org.retest.annotation.params.RandomParam;
 import org.retest.annotation.params.SecureRandomParam;
 import org.retest.datatype.DataType;
@@ -47,9 +46,7 @@ public abstract class TestDataFiles {
             Annotation a = parameterAnnotations[indexOfArguments][0];
 
             Class<? extends DataType> dataTypeClass = null;
-            if (a.annotationType() == ParamExpected.class) {
-                dataTypeClass = ((ParamExpected) a).dataTypeClass();
-            } else if (a.annotationType() == Param.class) {
+            if (a.annotationType() == Param.class) {
                 dataTypeClass = ((Param) a).dataTypeClass();
             } else if (a.annotationType() == RandomParam.class) {
                 dataTypeClass = ((RandomParam) a).randomizerClass();
@@ -87,9 +84,7 @@ public abstract class TestDataFiles {
                     }
 
                     String valueName = null;
-                    if (a.annotationType() == ParamExpected.class) {
-                        valueName = ((ParamExpected) a).name();
-                    } else if (a.annotationType() == Param.class) {
+                    if (a.annotationType() == Param.class) {
                         valueName = ((Param) a).name();
                     } else if (a.annotationType() == RandomParam.class) {
                         valueName = ((RandomParam) a).name();

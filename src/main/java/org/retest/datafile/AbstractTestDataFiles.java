@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.runners.model.FrameworkMethod;
-import org.retest.annotation.params.ParamExpected;
 
 /**
  *
@@ -40,22 +39,11 @@ public abstract class AbstractTestDataFiles {
     public List<Object> getArgumentsToSave(Object returnValue) {
         Annotation[][] parameterAnnotations = method.getMethod().getParameterAnnotations();
 
-        boolean hasParamExpected = false;
-
         if (parameterAnnotations.length > 0) {
             List result = new ArrayList<>();
             for (int i = 0; i < parameterAnnotations.length; i++) {
-                Object item = null;
                 if (parameterAnnotations[i].length > 0) {
-                    Annotation a = parameterAnnotations[i][0];
-                    if (a.annotationType() != ParamExpected.class) {
-                        result.add(arguments.get(i));
-                    } else if (!hasParamExpected) {
-                        result.add(returnValue);
-                        hasParamExpected = true;
-                    } else {
-                        Assert.fail("Test function has more than one parameter @ParamExpected!");
-                    }
+                    result.add(arguments.get(i));
                 }
             }
 
