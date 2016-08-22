@@ -43,7 +43,6 @@ import org.retest.annotation.params.RandomParam;
 public class Case01 {
 
     @Test
-    @Ignore
     @ReTest(100)
     @SaveBrokenTestDataFiles(filePath = "/tmp/testDataCase01.csv")
     public void test(@RandomParam Random r) throws InterruptedException {
@@ -54,6 +53,7 @@ public class Case01 {
     }
 
     @Test
+    @Ignore
     @LoadTestFromDataFiles(filePath = "/tmp/testDataCase01.csv")
     public void testLoad(@RandomParam Random r) throws InterruptedException {
         int[] arr = ArrayFactory.gerarArrayComSomatoriaZero(r, 3);
