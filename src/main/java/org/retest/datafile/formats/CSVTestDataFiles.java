@@ -34,18 +34,19 @@ public class CSVTestDataFiles extends TestDataFiles {
     }
 
     @Override
-    public void save(String filePath, FrameworkMethod method, List<Object> arguments, boolean hasExpectedValue) throws IOException {
+    public void save(String filePath, FrameworkMethod method, List<Object> arguments, boolean hasExpectedValue) throws IOException, InstantiationException, IllegalAccessException {
         saveHeader(filePath, method, hasExpectedValue);
-        saveBodyItem(filePath, arguments);
+        saveBodyItem(method, filePath, arguments);
     }
 
-    private void saveBodyItem(String filePath, List<Object> arguments) throws IOException {
+    private void saveBodyItem(FrameworkMethod method, String filePath, List<Object> arguments) throws IOException, InstantiationException, IllegalAccessException {
         File file = new File(filePath);
 
         StringBuilder content = new StringBuilder();
         String delim = "";
-        for (Object o : arguments) {
-            content.append(delim).append(o.toString());
+        for (int i = 0; i < arguments.size(); i++) {
+            Object o = arguments.get(i);
+            content.append(delim).append(serialize(method, o, i));
             delim = DELIM;
         }
 
@@ -68,12 +69,12 @@ public class CSVTestDataFiles extends TestDataFiles {
 
             StringBuilder content = new StringBuilder();
             String delim = "";
-            
+
             List<String> headers = getHeader(method, hasExpectedValue);
 
             for (String header : headers) {
-                    content.append(delim).append(header);
-                    delim = DELIM;
+                content.append(delim).append(header);
+                delim = DELIM;
             }
 
             bw.write(content.toString());
@@ -102,7 +103,7 @@ public class CSVTestDataFiles extends TestDataFiles {
         List<Object> result = null;
         result = new ArrayList<>();
         for (int i = 0; i < split.length; i++) {
-            Object item = convertToObject(method, split[i], i);
+            Object item = deserialize(method, split[i], i);
             result.add(item);
         }
         return result;

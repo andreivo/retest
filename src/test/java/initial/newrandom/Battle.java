@@ -21,44 +21,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package initial;
-
-import org.junit.Test;
-import static org.junit.Assert.*;
-import org.junit.Ignore;
-import org.junit.runner.RunWith;
-import org.retest.ReTestRunner;
-import org.retest.annotation.LoadTestFromDataFiles;
-import org.retest.annotation.ReTest;
-import org.retest.annotation.SaveSuccessTestDataFiles;
-import org.retest.annotation.params.IntegerParam;
+package initial.newrandom;
 
 /**
  *
  * @author andreivo
  */
-@RunWith(ReTestRunner.class)
-public class TestDataDriven {
+public class Battle {
 
-    public TestDataDriven() {
+    private Pokemon pk1;
+    private Pokemon pk2;
+
+    public Battle(Pokemon pk1, Pokemon pk2) {
+        this.pk1 = pk1;
+        this.pk2 = pk2;
     }
 
-    @Test
-    @Ignore
-    @ReTest(10)
-    @SaveSuccessTestDataFiles(filePath = "/tmp/testData.csv")
-    public Integer testA(@IntegerParam Integer i1, @IntegerParam Integer i2) {
-        int x = i1 + i2;
-        return x;
+    public Pokemon fight() {
+        if (pk1.getCp() > pk2.getCp()) {
+            return pk1;
+        } else {
+            return pk2;
+        }
     }
-    
-    @Test      
-    @LoadTestFromDataFiles(filePath = "/tmp/testData.csv")
-    public void testB(@IntegerParam Integer i1, 
-                      @IntegerParam Integer i2,
-                      @IntegerParam Integer r) {
-        int x = i1 + i2;
-        assertEquals(x, r, 0);
-    }
-    
+
 }

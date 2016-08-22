@@ -21,27 +21,70 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package org.retest.datatype;
+package initial.newrandom;
+
+import java.util.Objects;
 
 /**
  *
  * @author andreivo
  */
-public class NullDataType extends DataType<String> {
+public class Pokemon {
 
-    @Override
-    public String deserialize(String value) {
-        return null;
+    private String name;
+    private Integer cp;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getCp() {
+        return cp;
+    }
+
+    public void setCp(Integer cp) {
+        this.cp = cp;
+    }
+
+    public Pokemon(String name, Integer cp) {
+        this.name = name;
+        this.cp = cp;
     }
 
     @Override
-    public String randomizeParam() {
-        return null;
+    public String toString() {
+        return "Pokemon{name=" + name + ", cp=" + cp + "}";
     }
 
     @Override
-    public String serialize(String value) {
-        return null;
+    public int hashCode() {
+        int hash = 5;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Pokemon other = (Pokemon) obj;
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.cp, other.cp)) {
+            return false;
+        }
+        return true;
     }
 
 }

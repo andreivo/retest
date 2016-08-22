@@ -34,7 +34,39 @@ public abstract class TestDataFiles {
 
     public abstract List<Object> convertData(String record, FrameworkMethod method) throws Exception;
 
-    public Object convertToObject(FrameworkMethod method, String convertFrom, int indexOfArguments) throws InstantiationException, IllegalAccessException {
+    public String serialize(FrameworkMethod method, Object convertFrom, int indexOfArguments) throws InstantiationException, IllegalAccessException {
+        String finalData = null;
+        Annotation[][] parameterAnnotations = method.getMethod().getParameterAnnotations();
+        if (parameterAnnotations[indexOfArguments].length > 0) {
+
+            if (parameterAnnotations.length < indexOfArguments + 1) {
+                Assert.fail("Invalid number of parameters. The number of parameters in the file is greater than the test function.");
+            }
+
+            Annotation a = parameterAnnotations[indexOfArguments][0];
+
+            Class<? extends DataType> dataTypeClass = null;
+            if (a.annotationType() == Param.class) {
+                dataTypeClass = ((Param) a).dataTypeClass();
+            } else if (a.annotationType() == RandomParam.class) {
+                dataTypeClass = ((RandomParam) a).randomizerClass();
+            } else if (a.annotationType() == SecureRandomParam.class) {
+                dataTypeClass = ((SecureRandomParam) a).randomizerClass();
+            } else if (a.annotationType() == IntegerParam.class) {
+                dataTypeClass = ((IntegerParam) a).randomizerClass();
+            } else {
+                Assert.fail("Test method " + method.getName() + " contain invalid annotation param. @Param annotation not found!");
+            }
+            DataType con = dataTypeClass.newInstance();
+            finalData = con.serialize(convertFrom);
+        } else {
+            Assert.fail("Test method " + method.getName() + " contain invalid param. @Param annotation not found!");
+        }
+
+        return finalData;
+    }
+
+    public Object deserialize(FrameworkMethod method, String convertFrom, int indexOfArguments) throws InstantiationException, IllegalAccessException {
         Object finalData = null;
         Annotation[][] parameterAnnotations = method.getMethod().getParameterAnnotations();
         if (parameterAnnotations[indexOfArguments].length > 0) {
@@ -58,7 +90,7 @@ public abstract class TestDataFiles {
                 Assert.fail("Test method " + method.getName() + " contain invalid annotation param. @Param annotation not found!");
             }
             DataType con = dataTypeClass.newInstance();
-            finalData = con.getObjectFromString(convertFrom);
+            finalData = con.deserialize(convertFrom);
         } else {
             Assert.fail("Test method " + method.getName() + " contain invalid param. @Param annotation not found!");
         }

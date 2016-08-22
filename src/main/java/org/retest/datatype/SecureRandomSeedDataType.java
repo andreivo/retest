@@ -16,7 +16,7 @@ import org.retest.utils.SecureRandomSeed;
 public class SecureRandomSeedDataType extends DataType<SecureRandomSeed> {
 
     @Override
-    public SecureRandomSeed getObjectFromString(String value) {
+    public SecureRandomSeed deserialize(String value) {
         Long aLong = Long.decode(value);
         SecureRandomSeed rs = new SecureRandomSeed(aLong);
         return rs;
@@ -26,6 +26,11 @@ public class SecureRandomSeedDataType extends DataType<SecureRandomSeed> {
     public SecureRandomSeed randomizeParam() {
         SecureRandomSeed r = new SecureRandomSeed(System.currentTimeMillis());
         return r;
+    }
+
+    @Override
+    public String serialize(SecureRandomSeed value) {
+        return value.toString();
     }
 
 }

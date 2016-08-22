@@ -7,23 +7,16 @@
  */
 package initial;
 
-import org.retest.datatype.IntegerDataType;
-import java.security.SecureRandom;
 import java.util.Random;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.retest.annotation.ReTest;
 import org.retest.ReTestRunner;
 import org.retest.annotation.LoadTestFromDataFiles;
-import org.retest.annotation.params.Param;
-import org.retest.datatype.SecureRandomSeedDataType;
-import static org.junit.Assert.assertEquals;
 import org.junit.Ignore;
 import org.retest.annotation.SaveBrokenTestDataFiles;
 import org.retest.annotation.SaveSuccessTestDataFiles;
 import org.retest.annotation.params.RandomParam;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertEquals;
 
 /**

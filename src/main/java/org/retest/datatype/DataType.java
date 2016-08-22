@@ -14,14 +14,10 @@ package org.retest.datatype;
  */
 public abstract class DataType<T> {
 
-    /**
-    * DataType String into a correct object value
-    * 
-     * @param value String that represents a object
-     * @return Returns a correct object 
-    */
-    public abstract T getObjectFromString(String value);
-    
+    public abstract String serialize(T value);
+
+    public abstract T deserialize(String value);
+
     public abstract T randomizeParam();
 
 }
