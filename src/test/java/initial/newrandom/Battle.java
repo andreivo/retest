@@ -27,6 +27,8 @@ package initial.newrandom;
  *
  * @author andreivo
  */
+
+
 public class Battle {
 
     private Pokemon pk1;

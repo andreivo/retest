@@ -59,7 +59,9 @@ public class PokemonDataType extends DataType<Pokemon> {
         } catch (InterruptedException ex) {
         }
 
-        String[] namesPoke = {"Pikachu", "Ratata", "Charmander", "Bulbasaur", "Ivysaur", "Venusaur"};
+        String[] namesPoke = {"Pikachu", "Ratata", 
+                              "Charmander", "Bulbasaur", 
+                              "Ivysaur", "Venusaur"};
 
         Random r1 = new Random(System.currentTimeMillis());
         int iPo = r1.nextInt(5);

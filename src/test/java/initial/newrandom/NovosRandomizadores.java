@@ -41,28 +41,30 @@ import org.retest.annotation.params.Param;
 public class NovosRandomizadores {
 
     @Test
-    @ReTest(4)
-    //@SaveBrokenTestDataFiles(filePath = "/tmp/testData.csv")
+    @Ignore
+    @ReTest(10)
+    @SaveBrokenTestDataFiles(filePath = "/tmp/testData.csv")
     public void testPokemon(@Param(dataTypeClass = PokemonDataType.class) Pokemon pk1,
-            @Param(dataTypeClass = PokemonDataType.class) Pokemon pk2) throws Exception {
+                            @Param(dataTypeClass = PokemonDataType.class) Pokemon pk2) {
 
         Battle b = new Battle(pk1, pk2);
         Pokemon winner = b.fight();
 
-        assertTrue(pk1.getName() + "(" + pk1.getCp() + "cp) failed against " + pk2.getName() + "(" + pk2.getCp() + "cp)",
+        assertTrue(pk1.getName() + "(" + pk1.getCp() + "cp) failed against " + 
+                   pk2.getName() + "(" + pk2.getCp() + "cp)",
                 winner.equals(pk1));
     }
 
-    @Test
-    @Ignore
+    @Test    
     @LoadTestFromDataFiles(filePath = "/tmp/testData.csv")
     public void testPokemonLoad(@Param(dataTypeClass = PokemonDataType.class) Pokemon pk1,
-            @Param(dataTypeClass = PokemonDataType.class) Pokemon pk2) throws Exception {
+                                @Param(dataTypeClass = PokemonDataType.class) Pokemon pk2) {
 
         Battle b = new Battle(pk1, pk2);
         Pokemon winner = b.fight();
 
-        assertTrue(pk1.getName() + "(" + pk1.getCp() + "cp) failed against " + pk2.getName() + "(" + pk2.getCp() + "cp)",
+        assertTrue(pk1.getName() + "(" + pk1.getCp() + "cp) failed against " + 
+                   pk2.getName() + "(" + pk2.getCp() + "cp)",
                 winner.equals(pk1));
     }
 
