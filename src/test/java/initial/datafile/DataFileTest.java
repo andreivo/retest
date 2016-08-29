@@ -23,6 +23,7 @@
  */
 package initial.testdatadriven;
 
+import initial.datafile.NewFileTest;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Ignore;
@@ -38,21 +39,21 @@ import org.retest.annotation.params.IntegerParam;
  * @author andreivo
  */
 @RunWith(ReTestRunner.class)
-public class TestDataDriven {
+public class DataFileTest {
 
-    public TestDataDriven() {
+    public DataFileTest() {
     }
 
     @Test
     @ReTest(10)
-    @SaveSuccessTestDataFiles(filePath = "/tmp/testData.csv")
+    @SaveSuccessTestDataFiles(formatClass = NewFileTest.class, filePath = "/tmp/testData.csv")
     public Integer testA(@IntegerParam Integer i1, @IntegerParam Integer i2) {
         int x = i1 + i2;
         return x;
     }
 
     @Test
-    @LoadTestFromDataFiles(filePath = "/tmp/testData.csv")
+    @LoadTestFromDataFiles(formatClass = NewFileTest.class, filePath = "/tmp/testData.csv")
     public void testB(@IntegerParam Integer i1,
             @IntegerParam Integer i2,
             @IntegerParam Integer r) {
