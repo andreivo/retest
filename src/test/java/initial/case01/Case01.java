@@ -32,7 +32,6 @@ import org.junit.runner.RunWith;
 import org.retest.ReTestRunner;
 import org.retest.annotation.LoadTestFromDataFiles;
 import org.retest.annotation.ReTest;
-import org.retest.annotation.SaveBrokenTestDataFiles;
 import org.retest.annotation.params.RandomParam;
 
 /**
@@ -44,14 +43,27 @@ public class Case01 {
 
     @Test
     @ReTest(100)
-    @SaveBrokenTestDataFiles(filePath = "/tmp/testDataCase01.csv")
+    //@SaveBrokenTestDataFiles(filePath = "/tmp/testDataCase01.csv")
+    //@LoadTestFromDataFiles(filePath = "/tmp/testDataCase01.csv")
     public void test(@RandomParam Random r) throws InterruptedException {
         Thread.sleep(10);
-        int[] arr = ArrayFactory.gerarArrayComSomatoriaZero(r, 3);
-        assertElements(arr);
-        System.out.println(Arrays.toString(arr));
+        int[] arr = ArrayFactory.gerarArrayComSomatoriaZero(r,1000);
+        assertElements(arr);        
     }
 
+    private void assertElements(int[] arr) {
+        int result = 0;
+        for (int a : arr) {
+            //Verifica se todos os elementos estão entre -10 e 10
+            assertTrue(a >= -10 && a <= 10);
+            result = result + a;
+        }
+        //Verifica se a soma é igual a zero
+        assertEquals(0, result);
+    }
+    
+    
+    
     @Test
     @Ignore
     @LoadTestFromDataFiles(filePath = "/tmp/testDataCase01.csv")
@@ -60,14 +72,5 @@ public class Case01 {
         assertElements(arr);
         System.out.println(Arrays.toString(arr));
     }
-
-    private void assertElements(int[] arr) {
-        int result = 0;
-        for (int a : arr) {
-            assertTrue(a >= -10 && a <= 10);
-            result = result + a;
-        }
-
-        assertEquals(Arrays.toString(arr), 0, result);
-    }
+    
 }
