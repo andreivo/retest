@@ -31,6 +31,17 @@ import java.util.Random;
  */
 public class ArrayFactory {
 
+    public static int[] gerarArrayComSomatoriaZero0(Random r, int n) {
+        int[] result = new int[n];
+
+        //Gera numeros aleatórios
+        for (int i = 0; i < n; i++) {
+            result[i] = (r.nextInt(20) - 10);
+        }
+        return result;
+
+    }
+
     public static int[] gerarArrayComSomatoriaZero(Random r, int n) {
         int[] result = new int[n];
 
@@ -40,22 +51,21 @@ public class ArrayFactory {
             result[i] = (r.nextInt(20) - 10);
             soma = soma + result[i];
         }
-               
+
         //Corrige a soma
-        int i = 0;        
+        int i = 0;
         while (soma != 0) {
-            soma = soma - result[i];                        
+            soma = soma - result[i];
             int valor_corrigido_elemento = 0;
             int numeros_elementos_necessarios = Math.abs(soma / 10);
             //Indica que serão necessários corrigir mais de um elemento
             if (numeros_elementos_necessarios >= 1) {
-                valor_corrigido_elemento = 10 * (soma<=0 ? 1 : -1);
-            }else
-            {
-                valor_corrigido_elemento = soma  * (-1);
+                valor_corrigido_elemento = 10 * (soma <= 0 ? 1 : -1);
+            } else {
+                valor_corrigido_elemento = soma * (-1);
             }
             //Atualiza a soma
-            soma = soma+valor_corrigido_elemento;
+            soma = soma + valor_corrigido_elemento;
             //Corrige o valor do elemento
             result[i] = valor_corrigido_elemento;
             i++;

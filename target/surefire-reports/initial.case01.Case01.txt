@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: initial.case01.Case01
 -------------------------------------------------------------------------------
-Tests run: 101, Failures: 0, Errors: 0, Skipped: 1, Time elapsed: 1.299 sec
+Tests run: 28, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.227 sec

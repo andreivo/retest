@@ -23,15 +23,14 @@
  */
 package initial.case01;
 
-import java.util.Arrays;
 import static org.junit.Assert.*;
 import java.util.Random;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.retest.ReTestRunner;
 import org.retest.annotation.LoadTestFromDataFiles;
 import org.retest.annotation.ReTest;
+import org.retest.annotation.SaveBrokenTestDataFiles;
 import org.retest.annotation.params.RandomParam;
 
 /**
@@ -42,35 +41,43 @@ import org.retest.annotation.params.RandomParam;
 public class Case01 {
 
     @Test
-    @ReTest(100)
-    //@SaveBrokenTestDataFiles(filePath = "/tmp/testDataCase01.csv")
-    //@LoadTestFromDataFiles(filePath = "/tmp/testDataCase01.csv")
-    public void test(@RandomParam Random r) throws InterruptedException {
-        Thread.sleep(10);
-        int[] arr = ArrayFactory.gerarArrayComSomatoriaZero(r,1000);
-        assertElements(arr);        
+    public void test1(@RandomParam Random r) throws InterruptedException {
+        int n = 1;
+        int[] result = new int[n];
+
+        result[0] = 0;
+        assertElements(result, n);
     }
 
-    private void assertElements(int[] arr) {
+    @Test
+    @ReTest(10)
+    //@SaveBrokenTestDataFiles(filePath = "/tmp/testDataCase01.csv")
+    @LoadTestFromDataFiles(filePath = "/tmp/testDataCase01.csv")
+    public void test2(@RandomParam Random r) {
+        int n = 2;
+        int[] result = ArrayFactory.gerarArrayComSomatoriaZero(r, n);
+        assertElements(result, n);
+    }
+
+    @Test
+    @ReTest(10)
+    //@SaveBrokenTestDataFiles(filePath = "/tmp/testDataCase01.csv")
+    //@LoadTestFromDataFiles(filePath = "/tmp/testDataCase01.csv")
+    public void test3(@RandomParam Random r) throws InterruptedException {
+        Thread.sleep(10);
+        int n = 3;
+        int[] result = ArrayFactory.gerarArrayComSomatoriaZero(r, n);
+        assertElements(result, n);
+    }
+
+    private void assertElements(int[] arr, int tamanho) {
         int result = 0;
-        for (int a : arr) {
+        for (int i = 0; i < tamanho; i++) {
             //Verifica se todos os elementos estão entre -10 e 10
-            assertTrue(a >= -10 && a <= 10);
-            result = result + a;
+            assertTrue(arr[i] >= -10 && arr[i] <= 10);
+            result = result + arr[i];
         }
         //Verifica se a soma é igual a zero
         assertEquals(0, result);
     }
-    
-    
-    
-    @Test
-    @Ignore
-    @LoadTestFromDataFiles(filePath = "/tmp/testDataCase01.csv")
-    public void testLoad(@RandomParam Random r) throws InterruptedException {
-        int[] arr = ArrayFactory.gerarArrayComSomatoriaZero(r, 3);
-        assertElements(arr);
-        System.out.println(Arrays.toString(arr));
-    }
-    
 }
