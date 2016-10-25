@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package initial.testdatadriven;
+package initial.datafile;
 
 import initial.datafile.NewFileTest;
 import org.junit.Test;
@@ -45,6 +45,7 @@ public class DataFileTest {
     }
 
     @Test
+    @Ignore
     @ReTest(10)
     @SaveSuccessTestDataFiles(formatClass = NewFileTest.class, filePath = "/tmp/testData.csv")
     public Integer testA(@IntegerParam Integer i1, @IntegerParam Integer i2) {
@@ -53,6 +54,7 @@ public class DataFileTest {
     }
 
     @Test
+    @Ignore
     @LoadTestFromDataFiles(formatClass = NewFileTest.class, filePath = "/tmp/testData.csv")
     public void testB(@IntegerParam Integer i1,
             @IntegerParam Integer i2,

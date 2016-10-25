@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
-Test set: initial.case01.Case01
+Test set: initial.datafile.DataFileTest
 -------------------------------------------------------------------------------
-Tests run: 28, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.227 sec
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 2, Time elapsed: 0 sec

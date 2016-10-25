@@ -44,6 +44,7 @@ public class TestDataDriven {
     }
 
     @Test
+    @Ignore
     @ReTest(10)
     @SaveSuccessTestDataFiles(filePath = "/tmp/testData.csv")
     public Integer testA(@IntegerParam Integer i1, @IntegerParam Integer i2) {
@@ -52,6 +53,7 @@ public class TestDataDriven {
     }
 
     @Test
+    @Ignore
     @LoadTestFromDataFiles(filePath = "/tmp/testData.csv")
     public void testB(@IntegerParam Integer i1,
             @IntegerParam Integer i2,
