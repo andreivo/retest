@@ -42,33 +42,58 @@ public class Case01 {
 
     @Test
     public void test1(@RandomParam Random r) throws InterruptedException {
-        int n = 1;
-        int[] result = new int[n];
-
-        result[0] = 0;
-        assertElements(result, n);
+        int[] result = ArrayFactory.gerarArrayComSomatoriaZero(1, r);
+        assertEquals(1, result.length);
     }
 
     @Test
     @ReTest(10)
-    //@SaveBrokenTestDataFiles(filePath = "/tmp/testDataCase01.csv")
-    @LoadTestFromDataFiles(filePath = "/tmp/testDataCase01.csv")
-    public void test2(@RandomParam Random r) {
-        int n = 2;
-        int[] result = ArrayFactory.gerarArrayComSomatoriaZero(r, n);
-        assertElements(result, n);
+    //@SaveBrokenTestDataFiles(filePath = "/tmp/dataCase01.csv")
+    //@LoadTestFromDataFiles(filePath = "/tmp/dataCase01.csv")
+    public void test2(@RandomParam Random r) throws InterruptedException {
+        int[] result = ArrayFactory.gerarArrayComSomatoriaZero(2, r);
+        assertEquals(2, result.length);
+        assertElements(result, 2);
     }
 
     @Test
     @ReTest(10)
-    //@SaveBrokenTestDataFiles(filePath = "/tmp/testDataCase01.csv")
-    //@LoadTestFromDataFiles(filePath = "/tmp/testDataCase01.csv")
     public void test3(@RandomParam Random r) throws InterruptedException {
-        Thread.sleep(10);
-        int n = 3;
-        int[] result = ArrayFactory.gerarArrayComSomatoriaZero(r, n);
-        assertElements(result, n);
+        int[] result = ArrayFactory.gerarArrayComSomatoriaZero(3, r);
+        assertEquals(3, result.length);
+        assertElements(result, 3);
     }
+
+    @Test
+    @ReTest(10)
+    public void test4(@RandomParam Random r) throws InterruptedException {
+        int[] result = ArrayFactory.gerarArrayComSomatoriaZero(1000, r);
+        assertEquals(1000, result.length);
+        assertElements(result, 1000);
+    }
+//
+//
+//    @Test
+//    @ReTest(10)
+//    //@SaveBrokenTestDataFiles(filePath = "/tmp/testDataCase01.csv")
+//    @LoadTestFromDataFiles(filePath = "/tmp/testDataCase01.csv")
+//    public void test2(@RandomParam Random r) {
+//        int n = 2;
+//        int[] result = ArrayFactory.gerarArrayComSomatoriaZero(r, n);
+//        assertElements(result, n);
+//    }
+//
+//    @Test
+//    @ReTest(10)
+//    //@SaveBrokenTestDataFiles(filePath = "/tmp/testDataCase01.csv")
+//    //@LoadTestFromDataFiles(filePath = "/tmp/testDataCase01.csv")
+//    public void test3(@RandomParam Random r) throws InterruptedException {
+//        Thread.sleep(10);
+//        int n = 3;
+//        int[] result = ArrayFactory.gerarArrayComSomatoriaZero(r, n);
+//        assertElements(result, n);
+//    }
+//
 
     private void assertElements(int[] arr, int tamanho) {
         int result = 0;

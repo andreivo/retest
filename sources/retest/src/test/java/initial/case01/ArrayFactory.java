@@ -31,18 +31,31 @@ import java.util.Random;
  */
 public class ArrayFactory {
 
-    public static int[] gerarArrayComSomatoriaZero0(Random r, int n) {
-        int[] result = new int[n];
-
-        //Gera numeros aleatórios
-        for (int i = 0; i < n; i++) {
-            result[i] = (r.nextInt(20) - 10);
-        }
-        return result;
-
-    }
-
-    public static int[] gerarArrayComSomatoriaZero(Random r, int n) {
+//    public static int[] gerarArrayComSomatoriaZero(int n, Random r) {
+//        int[] result = new int[1];
+//        result[0] = 0;
+//        return result;
+//
+//    }
+//    public static int[] gerarArrayComSomatoriaZero(int n, Random r) {
+//        int[] result = new int[n];
+//        //Gera numeros aleatórios
+//        for (int i = 0; i < n; i++) {
+//            result[i] = (r.nextInt(20) - 10);
+//        }
+//        return result;
+//
+//    }
+//    public static int[] gerarArrayComSomatoriaZero(int n, Random r) {
+//        int[] result = new int[n];
+//        //Gera numeros aleatórios
+//        for (int i = 0; i < n; i++) {
+//            result[i] = (r.nextInt(20) - 10);
+//        }
+//        result[result.length - 1] = result[0] * -1;
+//        return result;
+//    }
+    public static int[] gerarArrayComSomatoriaZero(int n, Random r) {
         int[] result = new int[n];
 
         //Gera numeros aleatórios
@@ -72,11 +85,4 @@ public class ArrayFactory {
         }
         return result;
     }
-
-//    public static int[] gerarArrayComSomatoriaZero(Random r, int tamanho) {
-//        int[] result = new int[tamanho];
-//        result[0] = (r.nextInt(20) - 10);
-//        result[1] = result[0] * -1;
-//        return result;
-//    }
 }
