@@ -125,9 +125,11 @@ public class ReTestStatement extends Statement {
                 } else if (testPayload != null) {
                     values = testPayload.toArray();
                 } else {
-                    Assert.fail("Data not found!");
+                    System.out.println("Data not found!");
                 }
-                returnValue = method.invokeExplosively(freshInstance, values);
+                if (values != null) {
+                    returnValue = method.invokeExplosively(freshInstance, values);
+                }
             }
         };
     }

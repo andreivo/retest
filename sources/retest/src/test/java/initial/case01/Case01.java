@@ -43,6 +43,7 @@ public class Case01 {
     @Test
     @ReTest(10)
     @SaveBrokenTestDataFiles(filePath = "/tmp/testDataCase01.csv")
+    @LoadTestFromDataFiles(filePath = "/tmp/testDataCase01.csv")
     public void test0(@RandomParam Random r) throws InterruptedException {
         r.nextFloat();
         //int[] result = ArrayFactory.gerarArrayComSomatoriaZero(1, r);
