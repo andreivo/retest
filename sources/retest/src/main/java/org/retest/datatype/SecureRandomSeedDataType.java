@@ -7,6 +7,7 @@
  */
 package org.retest.datatype;
 
+import java.util.Random;
 import org.retest.utils.SecureRandomSeed;
 
 /**
@@ -24,7 +25,8 @@ public class SecureRandomSeedDataType extends DataType<SecureRandomSeed> {
 
     @Override
     public SecureRandomSeed randomizeParam() {
-        SecureRandomSeed r = new SecureRandomSeed(System.currentTimeMillis());
+        Random rseed = new Random(10000);
+        SecureRandomSeed r = new SecureRandomSeed(System.currentTimeMillis() - rseed.nextLong());
         return r;
     }
 

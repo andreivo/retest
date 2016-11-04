@@ -41,6 +41,15 @@ import org.retest.annotation.params.RandomParam;
 public class Case01 {
 
     @Test
+    @ReTest(10)
+    @SaveBrokenTestDataFiles(filePath = "/tmp/testDataCase01.csv")
+    public void test0(@RandomParam Random r) throws InterruptedException {
+        r.nextFloat();
+        //int[] result = ArrayFactory.gerarArrayComSomatoriaZero(1, r);
+        fail();
+    }
+
+    @Test
     public void test1(@RandomParam Random r) throws InterruptedException {
         int[] result = ArrayFactory.gerarArrayComSomatoriaZero(1, r);
         assertEquals(1, result.length);
