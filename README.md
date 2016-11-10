@@ -1,4 +1,4 @@
-# retest
+# ReTest
 ReTest is a JUnit extension perform Randomic Test with ease and simplicity. It supports method parameters with Test annotation and much more.
 
 ## 1.	Introduction
@@ -25,9 +25,43 @@ public class TestClazz {
 	}
 }
 ```
+In the above code, the test method is marked with the annotation @ReTest(10) that indicate this method will be run 10 times. 
 
+At each execution, the framework will initialize the Random parameter, received by the test method, with a different seed. Note that this object is send to the method being tested, in this case nonDeterministicAlgorithm(), which will use it internally to generate its random numbers and, consequently, as a basis for its non-deterministic decisions. 
 
+The assertResult() method checks whether the return of the algorithm is considered valid. Running the test multiple times with Random initialized with different seeds will allow for validation in a larger number of scenarios.
 
+The seeds used in the tests that fail will be stored in the file "tmp / file1.csv", because the test method is marked with the @SaveBrokenTestDataFiles annotation.
+
+When executed again, in addition to the ten repetitions configured by the @ReTest annotation, the test method will also run with the seeds stored in the "tmp / file1.csv" file, which is configured by the @LoadTestFromDataFiles annotation. Running the fail tests again, you can check that the error has been corrected, in addition to maintaining a set of regression tests.
+
+The idea is that, like in TDD, the tests are executed frequently, and at all the cicle of development the executions of test achieve good code coverage. This is reinforced by the fact that the tests that have failed previously are always executed again.
+
+## 3.	Features
+The ReTest framework has a very intuitive API that allows you to:
+1.	generate randomic data to be applied to the tests;
+2.	create custom randomizers for data in the application domain;
+3.	save the data from failed tests;
+4.	save test data that has been successfully executed;
+5.	save the return of the test method to generate a set of data based on random inputs and expected outputs;
+6.	load test data from external files or sources;
+7.	create custom mechanisms for handling external sources, both for saving and loading test data.
+
+### 3.1.	ReTest Annotation Set
+
+In addition to the common JUnit annotations, the ReTest framework has a set of 4 annotations for the test methods and 4 annotations for the method parameters.
+
+The annotations for the methods are:
+(a)	@ReTest: This annotation is responsible for performing the test repetition. In this annotation it is possible to indicate how many times the test should be repeated;
+(b)	@SaveBrokenTestDataFiles: When you mark a method with this annotation, the input data will be saved to the file when the test fails;
+(a)	@SaveSuccessTestDataFiles: When you mark a method with this annotation, the input data will be saved to file when the test passes successfully;
+(b)	@LoadTestFromDataFiles: When you mark a method with this annotation, the input data will be loaded from this file.
+
+The annotations for the method parameters are:
+(a)	@IntegerParam: Annotation indicates that the ReTest framework return in parameter a random integer;
+(b)	@RandomParam: This annotation indicates that the framework must pass an instance of an object of type Random, with a known seed, so that it can be stored and retrieved from files, making it possible to reconstruct the same test scenario;
+(c)	@SecureRandomParam: This annotation indicates that the framework must pass an instance of an object of type SecureRandom, with a known seed, so that it can be stored and retrieved from files, making it possible to reconstruct the same test scenario;
+(d)	@Param: This annotation allows to indicate custom randomizers for the specific data in the application domain, allowing the extension of the framework for random generation of several types of data.
 
 
 ### [MIT Licensed](LICENSE)
