@@ -5,7 +5,7 @@ ReTest is a JUnit extension perform Randomic Test with ease and simplicity. It s
 ReTest is an extension of JUnit that enable to application of the TDD in algorithms with non-deterministic characteristics.
 The ReTest framework to makes possible the repetition of the same test scenario, with different seeds for random data generation, to increase test coverage. From the result of these repetitions, the framework stores the seeds that have generated failures and uses them in future tests, ensuring that a scenario where an error was detected in the past is always executed again.
 
-## 2.	API Information for to use
+## 2.	API Information
 
 The first step is to add the library file in your project. The library can be downloaded through the URL: https://github.com/andreivo/retest/blob/master/binaries/ReTest-0.1.0-SNAPSHOT.jar
 
