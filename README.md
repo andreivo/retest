@@ -53,16 +53,18 @@ The ReTest framework has a very intuitive API that allows you to:
 In addition to the common JUnit annotations, the ReTest framework has a set of 4 annotations for the test methods and 4 annotations for the method parameters.
 
 The annotations for the methods are:
-(a) **@ReTest:** This annotation is responsible for performing the test repetition. In this annotation it is possible to indicate how many times the test should be repeated;
-(b) **@SaveBrokenTestDataFiles:** When you mark a method with this annotation, the input data will be saved to the file when the test fails;
-(c) **@SaveSuccessTestDataFiles:** When you mark a method with this annotation, the input data will be saved to file when the test passes successfully;
-(d) **@LoadTestFromDataFiles:** When you mark a method with this annotation, the input data will be loaded from this file.
+
+1. **@ReTest:** This annotation is responsible for performing the test repetition. In this annotation it is possible to indicate how many times the test should be repeated;
+2. **@SaveBrokenTestDataFiles:** When you mark a method with this annotation, the input data will be saved to the file when the test fails;
+3. **@SaveSuccessTestDataFiles:** When you mark a method with this annotation, the input data will be saved to file when the test passes successfully;
+4. **@LoadTestFromDataFiles:** When you mark a method with this annotation, the input data will be loaded from this file.
 
 The annotations for the method parameters are:
-(a) **@IntegerParam:** Annotation indicates that the ReTest framework return in parameter a random integer;
-(b) **@RandomParam:** This annotation indicates that the framework must pass an instance of an object of type Random, with a known seed, so that it can be stored and retrieved from files, making it possible to reconstruct the same test scenario;
-(c) **@SecureRandomParam:** This annotation indicates that the framework must pass an instance of an object of type SecureRandom, with a known seed, so that it can be stored and retrieved from files, making it possible to reconstruct the same test scenario;
-(d) **@Param:** This annotation allows to indicate custom randomizers for the specific data in the application domain, allowing the extension of the framework for random generation of several types of data.
+
+1. **@IntegerParam:** Annotation indicates that the ReTest framework return in parameter a random integer;
+2. **@RandomParam:** This annotation indicates that the framework must pass an instance of an object of type Random, with a known seed, so that it can be stored and retrieved from files, making it possible to reconstruct the same test scenario;
+3. **@SecureRandomParam:** This annotation indicates that the framework must pass an instance of an object of type SecureRandom, with a known seed, so that it can be stored and retrieved from files, making it possible to reconstruct the same test scenario;
+4. **@Param:** This annotation allows to indicate custom randomizers for the specific data in the application domain, allowing the extension of the framework for random generation of several types of data.
 
 
 ### [MIT Licensed](LICENSE)
