@@ -7,7 +7,7 @@ The ReTest framework to makes possible the repetition of the same test scenario,
 
 ## 2.	API Information
 
-The first step is to add the library file in your project. The library can be downloaded through the URL: https://github.com/andreivo/retest/blob/master/binaries/ReTest-0.1.0-SNAPSHOT.jar
+The first step is to add the library file in your project. The library can be downloaded in [ReTest](https://github.com/andreivo/retest/blob/master/binaries).
 
 To use ReTest simply create a test project using JUnit 4, and include the @RunWith annotation with ReTestRunner.class argument in the test class.
 In the test methods, you need include configuration annotations on the method and on the parameters that you want to be generated and managed by the tool. These parameters are then used as input data in the tests. Bellow is a simple example of use.
