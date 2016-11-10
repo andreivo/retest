@@ -39,13 +39,13 @@ The idea is that, like in TDD, the tests are executed frequently, and at all the
 
 ## 3.	Features
 The ReTest framework has a very intuitive API that allows you to:
-1.	generate randomic data to be applied to the tests;
-2.	create custom randomizers for data in the application domain;
-3.	save the data from failed tests;
-4.	save test data that has been successfully executed;
-5.	save the return of the test method to generate a set of data based on random inputs and expected outputs;
-6.	load test data from external files or sources;
-7.	create custom mechanisms for handling external sources, both for saving and loading test data.
+1. generate randomic data to be applied to the tests;
+2. create custom randomizers for data in the application domain;
+3. save the data from failed tests;
+4. save test data that has been successfully executed;
+5. save the return of the test method to generate a set of data based on random inputs and expected outputs;
+6. load test data from external files or sources;
+7. create custom mechanisms for handling external sources, both for saving and loading test data.
 
 ### 3.1.	ReTest Annotation Set
 
