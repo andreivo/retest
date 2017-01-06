@@ -7,7 +7,19 @@ The ReTest framework to makes possible the repetition of the same test scenario,
 
 ## 2.	API Information
 
-The first step is to add the library file in your project. The library can be downloaded in [ReTest](https://github.com/andreivo/retest/blob/master/binaries).
+The first step is to add the library file in your project.
+
+### If you use Maven:
+Add in your pom.xml file
+```xml
+<dependency>
+  <groupId>com.github.andreivo</groupId>
+  <artifactId>retest</artifactId>
+  <version>1.0</version>
+</dependency>
+```
+### If you prefer download of file:
+The library can be downloaded in [ReTest](https://oss.sonatype.org/content/groups/staging/com/github/andreivo/retest/1.0/).
 
 To use ReTest simply create a test project using JUnit 4, and include the @RunWith annotation with ReTestRunner.class argument in the test class.
 In the test methods, you need include configuration annotations on the method and on the parameters that you want to be generated and managed by the tool. These parameters are then used as input data in the tests. Bellow is a simple example of use.
