@@ -9,7 +9,7 @@ The ReTest framework to makes possible the repetition of the same test scenario,
 
 The first step is to add the library file in your project.
 
-### If you use Maven:
+#### If you use Maven:
 Add in your pom.xml file
 ```xml
 <dependency>
@@ -18,7 +18,7 @@ Add in your pom.xml file
   <version>1.0</version>
 </dependency>
 ```
-### If you prefer download of file:
+#### If you prefer download of file:
 The library can be downloaded in [ReTest](https://oss.sonatype.org/content/groups/staging/com/github/andreivo/retest/1.0/).
 
 ### 2.1 To use:
