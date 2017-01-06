@@ -27,11 +27,11 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Ignore;
 import org.junit.runner.RunWith;
-import org.retest.ReTestRunner;
-import org.retest.annotation.LoadTestFromDataFiles;
-import org.retest.annotation.ReTest;
-import org.retest.annotation.SaveSuccessTestDataFiles;
-import org.retest.annotation.params.IntegerParam;
+import retest.ReTestRunner;
+import retest.annotation.LoadTestFromDataFiles;
+import retest.annotation.ReTest;
+import retest.annotation.SaveSuccessTestDataFiles;
+import retest.annotation.params.IntegerParam;
 
 /**
  *

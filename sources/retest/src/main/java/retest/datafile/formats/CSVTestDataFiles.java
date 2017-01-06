@@ -5,7 +5,7 @@
  *           Created on : Jul 28, 2016, 7:47:26 PM
  * ****************************************************************
  */
-package initial.datafile;
+package retest.datafile.formats;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -23,7 +23,7 @@ import retest.datafile.TestDataFiles;
  *
  * @author andreivo
  */
-public class NewFileTest extends TestDataFiles {
+public class CSVTestDataFiles extends TestDataFiles {
 
     private static final String EXT = "csv";
     private static final String DELIM = ";";

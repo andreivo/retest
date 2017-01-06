@@ -21,46 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package initial.datafile;
-
-import initial.datafile.NewFileTest;
-import org.junit.Test;
-import static org.junit.Assert.*;
-import org.junit.Ignore;
-import org.junit.runner.RunWith;
-import retest.ReTestRunner;
-import retest.annotation.LoadTestFromDataFiles;
-import retest.annotation.ReTest;
-import retest.annotation.SaveSuccessTestDataFiles;
-import retest.annotation.params.IntegerParam;
+package retest.datatype;
 
 /**
  *
  * @author andreivo
  */
-@RunWith(ReTestRunner.class)
-public class DataFileTest {
+public class NullDataType extends DataType<String> {
 
-    public DataFileTest() {
+    @Override
+    public String deserialize(String value) {
+        return null;
     }
 
-    @Test
-    @Ignore
-    @ReTest(10)
-    @SaveSuccessTestDataFiles(formatClass = NewFileTest.class, filePath = "/tmp/testData.csv")
-    public Integer testA(@IntegerParam Integer i1, @IntegerParam Integer i2) {
-        int x = i1 + i2;
-        return x;
+    @Override
+    public String randomizeParam() {
+        return null;
     }
 
-    @Test
-    @Ignore
-    @LoadTestFromDataFiles(formatClass = NewFileTest.class, filePath = "/tmp/testData.csv")
-    public void testB(@IntegerParam Integer i1,
-            @IntegerParam Integer i2,
-            @IntegerParam Integer r) {
-        int x = i1 + i2;
-        assertEquals(x, r, 0);
+    @Override
+    public String serialize(String value) {
+        return null;
     }
 
 }

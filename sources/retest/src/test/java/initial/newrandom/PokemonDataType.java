@@ -24,7 +24,7 @@
 package initial.newrandom;
 
 import java.util.Random;
-import org.retest.datatype.DataType;
+import retest.datatype.DataType;
 
 /**
  *

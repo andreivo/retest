@@ -10,13 +10,13 @@ package initial;
 import java.util.Random;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.retest.annotation.ReTest;
-import org.retest.ReTestRunner;
-import org.retest.annotation.LoadTestFromDataFiles;
+import retest.annotation.ReTest;
+import retest.ReTestRunner;
+import retest.annotation.LoadTestFromDataFiles;
 import org.junit.Ignore;
-import org.retest.annotation.SaveBrokenTestDataFiles;
-import org.retest.annotation.SaveSuccessTestDataFiles;
-import org.retest.annotation.params.RandomParam;
+import retest.annotation.SaveBrokenTestDataFiles;
+import retest.annotation.SaveSuccessTestDataFiles;
+import retest.annotation.params.RandomParam;
 import static org.junit.Assert.assertEquals;
 
 /**
