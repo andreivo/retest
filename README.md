@@ -1,6 +1,6 @@
 # ReTest
 
-[![ghit.me](https://ghit.me/badge.svg?repo=andreivo/retest)](https://ghit.me/repo/andreivo/retest)
+[![HitCount](http://hits.dwyl.io/andreivo/restest.svg)](http://hits.dwyl.io/andreivo/retest)
 
 ReTest is a JUnit extension perform Randomic Test with ease and simplicity. It supports method parameters with Test annotation and much more.
 
